@@ -73,7 +73,7 @@ async def _(e):
         ajg = await e.eor("`Processing...`")
         await e.client(startvc(e.chat_id))
         await asyncio.sleep(1)
-        await ajg.edit(f"**❏ Obrolan Suara Aktif**\n**└ Chat ID** : `{chat}`")
+        await ajg.edit(f"**❏ pintu surga di buka**\n**└ Chat ID** : `{chat}`")
     except Exception as ex:
         await ajg.edit(f"`{ex}`")
 
@@ -109,7 +109,7 @@ async def join_(event):
     if not Nan.group_call.is_connected:
         await Nan.group_call.join(chat)
         await asyncio.sleep(1)
-        await event.eor(f"❏ **Berhasil Bergabung Voice Chat**\n└ **Chat ID:** `{chat}`")
+        await event.eor(f"❏ **Berhasil Bergabung di surga**\n└ **Chat ID:** `{chat}`")
         await asyncio.sleep(1)
         await Nan.group_call.set_is_mute(False)
         await asyncio.sleep(1)
@@ -130,7 +130,7 @@ async def leaver(event):
     jing = Player(chat)
     await jing.group_call.leave()
     await asyncio.sleep(1)
-    await event.eor(f"❏ **Berhasil Turun Voice Chat**\n└ **Chat ID:** `{chat}`")
+    await event.eor(f"❏ **Berhasil Turun ke neraka**\n└ **Chat ID:** `{chat}`")
     if CLIENTS.get(chat):
         del CLIENTS[chat]
     if VIDEO_ON.get(chat):
