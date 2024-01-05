@@ -13,11 +13,11 @@
 ๏ **Perintah:** `unmute` <balas pesan/berikan username>
 ◉ **Keterangan:** Aktifkan pengguna dalam obrolan saat ini.
 
-๏ **Perintah:** `dmute` <balas pesan/berikan username>
-◉ **Keterangan:** Bisukan pengguna dalam obrolan saat ini dengan menghapus pesan.
+๏ **Perintah:** `bl` <balas pesan/berikan username>
+◉ **Keterangan:** Masukan kata terlarang di grup ini.
 
-๏ **Perintah:** `undmute` <balas pesan/berikan username>
-◉ **Keterangan:** Suarakan pengguna yang dibisukan dalam obrolan saat ini.
+๏ **Perintah:** `unbl` <balas pesan/berikan username>
+◉ **Keterangan:** hapus kata terlarang dingrup ini.
 """
 from Ayra.dB.mute_db import is_muted, mute, unmute
 from Ayra.fns.admins import ban_time
@@ -37,11 +37,11 @@ async def watcher(event):
 
 
 @ayra_cmd(
-    pattern="[Dd][m][u][t][e]( (.*)|$)",
+    pattern="[Bb][l]( (.*)|$)",
 )
-@register(incoming=True, pattern=r"^\[Dd][m][u][t][e]( (.*)|$)", from_users=DEVS)
+@register(incoming=True, pattern=r"^\[Bb][l]( (.*)|$)", from_users=DEVS)
 async def startmute(event):
-    xx = await event.eor("`Bentar...`")
+    xx = await event.eor("`Waiting...`")
     if input_ := event.pattern_match.group(1).strip():
         try:
             userid = await event.client.parse_id(input_)
@@ -52,12 +52,12 @@ async def startmute(event):
         userid = reply.sender_id
         if reply.out or userid in [ayra_bot.me.id, asst.me.id]:
             return await xx.eor(
-                "`Anda tidak dapat membisukan diri sendiri atau bot asisten Anda.`"
+                "`Anda tidak dapat masukan kata terlarang diri sendiri.`"
             )
     elif event.is_private:
         userid = event.chat_id
     else:
-        return await xx.eor("`Balas ke pengguna atau tambahkan userid mereka.`", time=5)
+        return await xx.eor("`Balas ke pengguna atau tambahkan kata terlarang.`", time=5)
     chat = await event.get_chat()
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if not chat.admin_rights.delete_messages:
@@ -65,17 +65,17 @@ async def startmute(event):
     elif "creator" not in vars(chat) and not event.is_private:
         return await xx.eor("`Tidak ada hak admin...`", time=5)
     if is_muted(event.chat_id, userid):
-        return await xx.eor("`Pengguna ini sudah dibisukan dalam obrolan ini.`", time=5)
+        return await xx.eor("`kata terlarang sukses di tambahkan.`", time=5)
     mute(event.chat_id, userid)
-    await xx.eor("`Berhasil dibisukan...`", time=3)
+    await xx.eor("`Berhasil di madukan kata terlarang di grup ini...`", time=3)
 
 
 @ayra_cmd(
-    pattern="[uU][n][d][m][u][t][e]( (.*)|$)",
+    pattern="[uU][n][b[l]( (.*)|$)",
 )
-@register(incoming=True, pattern=r"^\[uU][n][d][m][u][t][e]( (.*)|$)", from_users=DEVS)
+@register(incoming=True, pattern=r"^\[uU][n][b][l]( (.*)|$)", from_users=DEVS)
 async def endmute(event):
-    xx = await event.eor("`Bentar...`")
+    xx = await event.eor("`Waiting...`")
     if input_ := event.pattern_match.group(1).strip():
         try:
             userid = await event.client.parse_id(input_)
@@ -86,11 +86,11 @@ async def endmute(event):
     elif event.is_private:
         userid = event.chat_id
     else:
-        return await xx.eor("`Balas ke pengguna atau tambahkan userid mereka.`", time=5)
+        return await xx.eor("`Balas ke pengguna atau tambahkan kata terlarang.`", time=5)
     if not is_muted(event.chat_id, userid):
-        return await xx.eor("`Pengguna ini tidak dibisukan dalam obrolan ini.`", time=3)
+        return await xx.eor("`Kata terlarang sukses di.tambahkan.`", time=3)
     unmute(event.chat_id, userid)
-    await xx.eor("`Berhasil disuarakan...`", time=3)
+    await xx.eor("`Berhasil di hapus kata terlarang..`", time=3)
 
 
 @ayra_cmd(
