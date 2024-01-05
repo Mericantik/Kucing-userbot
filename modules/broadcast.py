@@ -118,7 +118,7 @@ async def ungblacker(event):
 async def chatbl(event):
     id = event.chat_id
     if xx := list_bl(id):
-        sd = "**❏ Daftar Blacklist Gcast**\n\n"
+        sd = "**❏ menyimpam peju di lobang meki**\n\n"
         return await event.eor(sd + xx)
     await event.eor("**Belum ada daftar**")
 
