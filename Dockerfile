@@ -5,7 +5,7 @@ COPY installer.sh .
 RUN bash installer.sh
 
 # changing workdir
-WORKDIR "/root/Key-Userbot"
+WORKDIR "/root/Kucing-userbot"
 
 # start the bot.
 CMD ["bash", "start"]
