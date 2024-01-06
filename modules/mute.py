@@ -67,7 +67,7 @@ async def startmute(event):
     if is_muted(event.chat_id, userid):
         return await xx.eor("`kata terlarang sukses di tambahkan.`", time=5)
     mute(event.chat_id, userid)
-    await xx.eor("`Berhasil di madukan kata terlarang di grup ini...`", time=3)
+    await xx.eor("`Berhasil di masukan kata terlarang di grup ini...`", time=3)
 
 
 @ayra_cmd(
